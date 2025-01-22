@@ -116,13 +116,11 @@ body {
   from,
   to {
     width: 0px;
-    /* Start with no text */
   }
 
   50%,
   55% {
     width: 100%;
-    /* Type all characters (adjust for text length) */
   }
 }
 
