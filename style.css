@@ -1,0 +1,359 @@
+/* MAIN CSS STYLING STARTS FROM HERE  */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+  width: 100%;
+  min-width: 240px;
+  font-family: "Open Sans", sans-serif;
+}
+
+body {
+  background-color: #04172e;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  position: relative;
+}
+
+.container {
+  margin: 50px auto 20px;
+  background-color: #04172e;
+  width: 90%;
+  max-width: 960px;
+  border-radius: 1.2em;
+  min-height: 50vh;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  align-items: center;
+  position: relative;
+  /* margin-top: 50px; */
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+.container::before,
+.container::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 1.2rem;
+  background-image: conic-gradient(
+    from var(--angle),
+    #ff4545,
+    #0f9,
+    #006aff,
+    #ff0095,
+    #ff4545
+  );
+  z-index: -1 !important;
+  padding: 3px;
+  animation: 2s spin linear infinite;
+}
+
+.container::before {
+  filter: blur(1.3rem);
+  opacity: 0.5;
+}
+@keyframes spin {
+  from {
+    --angle: 0deg;
+  }
+  to {
+    --angle: 360deg;
+  }
+}
+
+.heading {
+  text-align: center;
+  margin: 20px auto;
+  /* width: max-content; */
+}
+
+@keyframes flow {
+  to {
+    background-position: 200%;
+  }
+}
+.heading h1 {
+  padding: 8px;
+  font-size: 3rem;
+  background-image: linear-gradient(
+    to right,
+    #d9e77e,
+    #81fff7,
+    #0f9,
+    #ffadaf,
+    #d9e77e
+  );
+  color: transparent;
+  background-clip: text;
+  background-size: 200%;
+  width: max-content;
+  border-right: 0.12em solid #dcca0c;
+  white-space: nowrap;
+  overflow: hidden;
+  font-weight: 600;
+  margin: 0 auto;
+  animation: typing 8s steps(40, end) infinite, blink 0.5s step-end infinite,
+    flow 3s linear infinite;
+}
+
+@keyframes typing {
+  from,
+  to {
+    width: 0px;
+    /* Start with no text */
+  }
+
+  50%,
+  55% {
+    width: 100%;
+    /* Type all characters (adjust for text length) */
+  }
+}
+
+@keyframes blink {
+  from,
+  to {
+    border-color: transparent;
+  }
+
+  50% {
+    border-color: #dcca0c;
+  }
+}
+
+.input-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  margin: 10px;
+}
+#task-input {
+  box-sizing: border-box;
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  border-radius: 0.63rem;
+  margin-right: 10px;
+  padding: 10px 15px;
+  font-size: 1.2rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+#task-input:focus {
+  border: 1px solid #ffadaf;
+}
+#task-input::placeholder {
+  color: rgb(228, 217, 217);
+  font-style: italic;
+}
+
+#add-task-button {
+  background-color: #ffadaf;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.4rem;
+  text-align: center;
+  height: 2.5rem;
+  width: 2.5rem;
+  padding: 10px;
+  color: white;
+  border-radius: 50%;
+  font-weight: bold;
+  cursor: pointer;
+}
+#add-task-button:hover {
+  background-color: #ee667c;
+  /* border: 1px solid transparent; */
+  box-shadow: 0 0 10px rgb(246, 138, 138);
+}
+#add-task-button::before {
+  content: "+";
+}
+#stars {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Ensures stars stay inside the viewport */
+  z-index: -2;
+}
+
+.star {
+  position: absolute;
+  /* width: 2px;
+  height: 2px; */
+  background-color: white; /* Star color */
+  border-radius: 50%; /* Make stars circular */
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.8); /* Add a glow effect */
+  animation: twinkle 2s infinite ease-in-out; /* Twinkling effect */
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+/* DEALING WITH LIST */
+
+#task-list {
+  width: 100%;
+  max-width: 500px;
+  margin: 10px;
+  margin-bottom: 30px;
+  list-style-type: none;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 3px;
+}
+#task-list li {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 0.63rem;
+  background-color: #04172e;
+  color: white;
+  position: relative;
+  font-size: 1rem;
+}
+/* .task-list li i {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 1.2rem;
+} */
+.item {
+  flex: 0.9;
+  margin: 0 10px;
+}
+#task-list li i {
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+#task-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+#task-list li::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(to right, #ffadaf, #d9e77e);
+  width: 100%;
+  height: 100%;
+  border-radius: 0.63rem;
+  padding: 2.5px;
+  z-index: -10;
+}
+
+.fa-trash-can:hover {
+  color: #ff4545;
+}
+.fa-pen-to-square:hover {
+  color: rgb(90, 220, 224);
+}
+.fa-pen-to-square {
+  margin-right: 5px;
+}
+.fa-circle:hover {
+  color: #c7ffad;
+}
+
+/* toggling  */
+.strike {
+  text-decoration: line-through;
+  color: #9d9e9b;
+}
+.toggle-check.fa-check-circle {
+  border-radius: 50%;
+  background-color: green; /* Green background */
+  color: white; /* White icon color */
+}
+
+/* DEALING WITH RESPONSIVENESS */
+@media (max-width: 600px) {
+  .task-list li::before {
+    padding: 1.5px;
+  }
+  .container::before,
+  .container::after {
+    padding: 2.5px;
+  }
+}
+@media (max-width: 550px) {
+  .heading h1 {
+    font-size: 2.6rem;
+  }
+}
+@media (max-width: 480px) {
+  .heading h1 {
+    font-size: 2.1rem;
+  }
+  #task-input {
+    font-size: 1rem;
+    padding: 8px 12px;
+  }
+  #task-list li {
+    padding: 8px 10px;
+  }
+  #add-task-button {
+    box-sizing: border-box;
+    width: 35px;
+    height: 35px;
+    font-size: 1.2rem;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 300px) {
+  .input-container {
+    flex-direction: column;
+  }
+  #task-input {
+    width: 100%;
+    margin-right: 0;
+  }
+  #add-task-button::before {
+    content: "Add task";
+    /* margin-right: 0; */
+  }
+  #add-task-button {
+    width: fit-content;
+    content: "";
+    border-radius: 10px;
+    margin-top: 10px;
+    font-size: 1rem;
+  }
+  .heading h1 {
+    font-size: 1.5rem;
+  }
+}
